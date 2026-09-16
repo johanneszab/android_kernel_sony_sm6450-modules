@@ -2277,7 +2277,7 @@ error:
 
 extern char *get_adc_kb(void);
 /* 2023-10-26 chenlang@huaqin.com add for hardware TE Func*/
-static int dsi_panel_get_board_id()
+static int dsi_panel_get_board_id(void)
 {
     static char board_id[64] = {0};
 

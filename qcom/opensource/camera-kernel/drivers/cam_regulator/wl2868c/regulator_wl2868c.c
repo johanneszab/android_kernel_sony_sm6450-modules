@@ -570,7 +570,7 @@ static struct i2c_driver wl2868c_i2c_driver = {
 	},
 };
 
-int __init wl2868c_chip_init_module()
+int __init wl2868c_chip_init_module(void)
 {
 	if (i2c_add_driver(&wl2868c_i2c_driver)) {
 		REG_PRINT("i2c driver register failed");
