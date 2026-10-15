@@ -883,7 +883,7 @@ int cam_sensor_match_id(struct cam_sensor_ctrl_t *s_ctrl)
 	uint32_t chipid = 0;
 	struct cam_camera_slave_info *slave_info;
 	const char * imx582_sensor_name;
-	char *module_sensor_name;
+	char *module_sensor_name = NULL;
 	uint32_t imx582_flag_and_module_id=0;
 	slave_info = &(s_ctrl->sensordata->slave_info);
 	imx582_sensor_name = s_ctrl->sensor_name;
@@ -928,7 +928,8 @@ int cam_sensor_match_id(struct cam_sensor_ctrl_t *s_ctrl)
 			module_sensor_name = "txd_imx582";
 		}
 		s_ctrl->io_master_info.cci_client->sid=0x34>>1;
-		if(0!=strcmp(imx582_sensor_name, module_sensor_name))
+		/* An unknown module id matches neither sensor variant. */
+		if(!module_sensor_name || 0!=strcmp(imx582_sensor_name, module_sensor_name))
 		{
 			CAM_DBG(CAM_SENSOR,"imx582_sensor_name: %s", imx582_sensor_name);
 			return -ENODEV;
